@@ -15,7 +15,7 @@ struct musicaView: View {
             LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .center)
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             VStack(){
-                AsyncImage(url: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2iZgUdIo5C7VBXKyyuxsXotUcmgEAt8l3TAW5vt02hlHy-U_kzhuFIhE04g0WOlAsmU&usqp=CAU")){ result in
+                AsyncImage(url: URL(string: musica.capa)){ result in
                     result.image?
                         .frame(width: 200,height: 200)
                         .clipped()
