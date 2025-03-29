@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showSheet = false
     
     @StateObject var viewModel = ViewModel()
     
@@ -26,9 +27,9 @@ struct ContentView: View {
                 Text("Biblioteca de Jogos")
                     .font(.system(.largeTitle))
                     .bold()
-                    .frame(width: 1000,height: 100)
-                    .background(Color.orange)
-                    .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                    .frame(width: 350,height: 100)
+                    .background(Color.white)
+                    .cornerRadius(20)
                 Spacer()
                 Spacer()
             }
@@ -54,6 +55,18 @@ struct ContentView: View {
                                     .foregroundStyle(Color.black)
                                     .font(.title2)
                                     .bold()
+                                Button("Mais informações") {
+                                    showSheet.toggle()
+                                }
+                                .font(.title3)
+                                .foregroundStyle(Color.white)
+                                .bold()
+                                .padding(5)
+                                .background(Color.black)
+                                .cornerRadius(5)
+                                .sheet(isPresented: $showSheet) {
+                                    InfoView(jogo: game)
+                                }
                                 Spacer()
                             }
                             .frame(width: 200, height: 200)
@@ -64,7 +77,6 @@ struct ContentView: View {
                         .padding(.vertical, 800)
                     }
                 }
-                .padding(.leading, 80)
                 Spacer()
             }
         }
