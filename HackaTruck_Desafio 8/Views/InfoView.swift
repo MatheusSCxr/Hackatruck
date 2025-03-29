@@ -10,47 +10,59 @@ import SwiftUI
 struct InfoView: View {
     @Environment(\.dismiss) var dismiss
     
-    @State var jogo : GameAPI = GameAPI(titulo: "placeholder", plataforma: "placeholder", genero: ["placeholder"], desenvolvedora: "placeholder", publicadora: "placeholder", data_lancamento: "placeholder", classificacao_etaria: "placeholder", descricao: "placeholder", personagens_principais: ["placeholder"], imagem_capa: "placeholder", preco: 0.0)
+    @Binding var jogo: GameAPI
     
     var body: some View {
         ZStack(){
             Color.orange
                 .ignoresSafeArea(.all)
+            Rectangle()
+                .foregroundColor(.white)
+                .frame(width: 365, height: 600)
+                .cornerRadius(20)
+                .overlay(
             VStack(alignment: .leading) {
                 Spacer()
                 Text("\(jogo.titulo ?? "")")
                     .foregroundStyle(Color.black)
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title)
                     .bold()
-                    .padding(.top, 80)
-                    .padding(.bottom, 10)
-                Text("Plataforma: \(jogo.plataforma ?? "")")
+                    .frame(width: 300, height: 75, alignment: .leading)
+                    .lineLimit(2)
+                Text("Plataforma: \n    \(jogo.plataforma ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Gêneros: \(jogo.genero ?? [])")
+                    .bold()
+                Text("Gêneros: \n     \(jogo.genero ?? [])")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Desenvolvedora: \(jogo.desenvolvedora ?? "")")
+                    .bold()
+                Text("Desenvolvedora: \n    \(jogo.desenvolvedora ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Publicadora: \(jogo.publicadora ?? "")")
+                    .bold()
+                Text("Publicadora: \n    \(jogo.publicadora ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Data de Lançamento: \(jogo.data_lancamento ?? "")")
+                    .bold()
+                Text("Data de Lançamento: \n    \(jogo.data_lancamento ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Classificação Etária: \(jogo.classificacao_etaria ?? "")")
+                    .bold()
+                Text("Classificação Etária: \n    \(jogo.classificacao_etaria ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Descrição: \(jogo.descricao ?? "")")
+                    .bold()
+                Text("Descrição: \n    \(jogo.descricao ?? "")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Personagens Principais: \(jogo.personagens_principais ?? [])")
+                    .bold()
+                Text("Personagens Principais: \n    \(jogo.personagens_principais ?? [])")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
-                Text("Preço: R$ \(jogo.preco ?? 0, specifier: "%.2f")")
+                    .bold()
+                Text("Preço:\n    $\(jogo.preco ?? 0, specifier: "%.2f")")
                     .foregroundStyle(Color.black)
-                    .padding(.bottom, 10)
+                    .bold()
+                Spacer()
+                .font(.title)
+                .foregroundColor(.black)
+            }
+                .padding(.leading, 5)
+            )
+            VStack(){
                 Spacer()
                 Spacer()
                 HStack{
@@ -62,20 +74,15 @@ struct InfoView: View {
                     .padding()
                     .foregroundStyle(Color.white)
                     .background(.black)
-                    .cornerRadius(25)
-                    .padding(.leading, -35)
+                    .cornerRadius(20)
+                    .padding(.leading, -25)
                     Spacer()
                 }
-                .font(.title)
-                .foregroundColor(.black)
-                .padding(10)
             }
-            .padding(.leading, 30)
-            .frame()
         }
     }
 }
 
 #Preview {
-    InfoView()
+    InfoView(jogo:  .constant(GameAPI(titulo: "placeholder", plataforma: "placeholder", genero: ["placeholder"], desenvolvedora: "placeholder", publicadora: "placeholder", data_lancamento: "placeholder", classificacao_etaria: "placeholder", descricao: "placeholder", personagens_principais: ["placeholder"], imagem_capa: "placeholder", preco: 0.0)))
 }

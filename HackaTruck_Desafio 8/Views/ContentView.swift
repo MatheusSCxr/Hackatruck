@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @StateObject var viewModel = ViewModel()
     
+    @State var aux = GameAPI(titulo: "placeholder", plataforma: "placeholder", genero: ["placeholder"], desenvolvedora: "placeholder", publicadora: "placeholder", data_lancamento: "placeholder", classificacao_etaria: "placeholder", descricao: "placeholder", personagens_principais: ["placeholder"], imagem_capa: "placeholder", preco: 0.0)
     var body: some View {
         ZStack(){
             AsyncImage(url: URL(string:  "https://images.unsplash.com/photo-1630051822408-b80dde2f5681?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")){ result in
@@ -36,7 +37,7 @@ struct ContentView: View {
             VStack(){
                 ScrollView(.horizontal){
                     HStack{
-                        ForEach(viewModel.jogos, id: \.self){ game in
+                        ForEach(viewModel.jogos, id: \.self){game in
                             VStack(){
                                 AsyncImage(url: URL(string: "https://cdn-icons-png.flaticon.com/512/1373/1373568.png")){ image in
                                     image
@@ -57,6 +58,8 @@ struct ContentView: View {
                                     .bold()
                                 Button("Mais informações") {
                                     showSheet.toggle()
+                                    aux = game
+                                    
                                 }
                                 .font(.title3)
                                 .foregroundStyle(Color.white)
@@ -65,7 +68,7 @@ struct ContentView: View {
                                 .background(Color.black)
                                 .cornerRadius(5)
                                 .sheet(isPresented: $showSheet) {
-                                    InfoView(jogo: game)
+                                    InfoView(jogo: $aux)
                                 }
                                 Spacer()
                             }
